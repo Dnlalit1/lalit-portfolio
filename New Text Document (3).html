@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lalit Nishad | Sr. Executive – ERP & Projects</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Lexend:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-deep: #050706;
+            --bg-surface: #0d110f;
+            --accent-green: #1b4d3e; /* Forest Green */
+            --accent-bright: #2ecc71; /* High-visibility green */
+            --gold: #c5a059;
+            --text-main: #f0f2f1;
+            --text-dim: #94a39d;
+            --glass: rgba(255, 255, 255, 0.03);
+            --border: rgba(255, 255, 255, 0.08);
+            --transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-deep);
+            color: var(--text-main);
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* --- Background Animation --- */
+        #hero-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.5;
+        }
+
+        /* --- Layout --- */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        section {
+            padding: 120px 0;
+            opacity: 0;
+            transform: translateY(40px);
+            transition: var(--transition);
+        }
+
+        section.reveal {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* --- Typography --- */
+        h1, h2, h3, h4 {
+            font-family: 'Lexend', sans-serif;
+            font-weight: 600;
+        }
+
+        .gold-text {
+            color: var(--gold);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            display: block;
+            margin-bottom: 1rem;
+        }
+
+        /* --- Navigation --- */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(5, 7, 6, 0.8);
+            backdrop-filter: blur(15px);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .nav-content {
+            height: 80px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Lexend', sans-serif;
+            font-weight: 700;
+            font-size: 1.4rem;
+            color: var(--text-main);
+            text-decoration: none;
+        }
+
+        .logo span { color: var(--accent-bright); }
+
+        .nav-links a {
+            color: var(--text-dim);
+            text-decoration: none;
+            margin-left: 2.5rem;
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover { color: var(--accent-bright); }
+
+        /* --- Hero Section --- */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: radial-gradient(circle at center, rgba(27, 77, 62, 0.15) 0%, transparent 70%);
+        }
+
+        .hero-content h1 {
+            font-size: clamp(2.5rem, 8vw, 4.5rem);
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #fff 0%, #94a39d 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-tagline {
+            font-size: 1.4rem;
+            color: var(--gold);
+            font-weight: 300;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+        }
+
+        .hero-intro {
+            max-width: 700px;
+            margin: 0 auto 3rem;
+            color: var(--text-dim);
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+        }
+
+        .btn {
+            padding: 1.2rem 2.5rem;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: var(--transition);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn-primary {
+            background: var(--accent-bright);
+            color: var(--bg-deep);
+        }
+
+        .btn-outline {
+            border: 1px solid var(--border);
+            color: var(--text-main);
+            background: var(--glass);
+        }
+
+        .btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(46, 204, 113, 0.2);
+        }
+
+        /* --- About Section --- */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .highlight-list {
+            list-style: none;
+            margin-top: 2rem;
+        }
+
+        .highlight-list li {
+            margin-bottom: 1rem;
+            padding-left: 1.5rem;
+            position: relative;
+            color: var(--text-dim);
+        }
+
+        .highlight-list li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--accent-bright);
+        }
+
+        /* --- Experience Timeline --- */
+        .timeline {
+            position: relative;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .timeline::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 1px;
+            height: 100%;
+            background: var(--border);
+        }
+
+        .timeline-item {
+            padding: 0 0 4rem 3rem;
+            position: relative;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -5px;
+            top: 0;
+            width: 10px;
+            height: 10px;
+            background: var(--accent-bright);
+            border-radius: 50%;
+            z-index: 2;
+        }
+
+        .timeline-date {
+            color: var(--gold);
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-card {
+            background: var(--bg-surface);
+            padding: 2rem;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+        }
+
+        /* --- Case Studies --- */
+        .case-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .case-card {
+            background: var(--bg-surface);
+            border: 1px solid var(--border);
+            padding: 2.5rem;
+            border-radius: 12px;
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .case-card:hover {
+            border-color: var(--accent-bright);
+            background: linear-gradient(145deg, #0d110f 0%, #15221b 100%);
+        }
+
+        .case-card h3 { margin-bottom: 1.5rem; font-size: 1.4rem; }
+
+        .case-meta {
+            margin-top: auto;
+            padding-top: 2rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .tag {
+            font-size: 0.7rem;
+            padding: 0.3rem 0.8rem;
+            background: rgba(46, 204, 113, 0.1);
+            color: var(--accent-bright);
+            border-radius: 4px;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+
+        /* --- Skills Section --- */
+        .skills-wrapper {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 2rem;
+        }
+
+        .skill-group h4 {
+            color: var(--gold);
+            margin-bottom: 1.5rem;
+            font-size: 1rem;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 0.5rem;
+        }
+
+        .skill-list { list-style: none; }
+        .skill-list li {
+            color: var(--text-dim);
+            margin-bottom: 0.6rem;
+            font-size: 0.9rem;
+        }
+
+        /* --- Contact Form --- */
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 4rem;
+        }
+
+        .contact-info a {
+            color: var(--text-main);
+            display: block;
+            margin-bottom: 1rem;
+            text-decoration: none;
+            font-size: 1.1rem;
+        }
+
+        .contact-form {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        .contact-form input, .contact-form textarea {
+            background: var(--bg-surface);
+            border: 1px solid var(--border);
+            padding: 1rem;
+            color: white;
+            font-family: inherit;
+            border-radius: 4px;
+        }
+
+        .contact-form textarea { grid-column: span 2; }
+
+        .contact-form button {
+            grid-column: span 2;
+            cursor: pointer;
+            border: none;
+        }
+
+        footer {
+            text-align: center;
+            padding: 60px 0;
+            border-top: 1px solid var(--border);
+            color: var(--text-dim);
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .about-grid, .contact-container, .contact-form {
+                grid-template-columns: 1fr;
+            }
+            .contact-form input, .contact-form textarea, .contact-form button {
+                grid-column: span 1;
+            }
+            .nav-links { display: none; }
+            .hero-content h1 { font-size: 2.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <canvas id="hero-canvas"></canvas>
+
+    <nav>
+        <div class="container nav-content">
+            <a href="#" class="logo">LALIT<span>.</span></a>
+            <div class="nav-links">
+                <a href="#about">About</a>
+                <a href="#experience">Timeline</a>
+                <a href="#case-studies">Case Studies</a>
+                <a href="#skills">Expertise</a>
+                <a href="#contact">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero reveal">
+        <div class="container">
+            <div class="hero-content">
+                <span class="gold-text">Product-Minded Execution Leader</span>
+                <h1>Lalit Nishad</h1>
+                <p class="hero-tagline">"I Turn Operational Chaos into Structured, Scalable Digital Systems."</p>
+                <p class="hero-intro">Execution-focused leader with PAN-India delivery experience across MEP, Civil & Interior fit-outs and SaaS ERP implementations.</p>
+                <div class="btn-group">
+                    <a href="#case-studies" class="btn btn-primary">View Case Studies</a>
+                    <a href="#contact" class="btn btn-outline">Contact Me</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="container">
+        <section id="about" class="reveal">
+            <div class="about-grid">
+                <div>
+                    <span class="gold-text">Background</span>
+                    <h2>Electrical Engineer & Digital Architect</h2>
+                    <p style="margin-top: 1.5rem; color: var(--text-dim);">I bridge the gap between heavy on-ground execution and modern software intelligence. Currently leading end-to-end ERP implementation for <strong>Piramal Nextgen Industries</strong>.</p>
+                </div>
+                <div>
+                    <ul class="highlight-list">
+                        <li>57+ PAN India projects delivered (MEP & Civil)</li>
+                        <li>CFO recognized dashboard innovation</li>
+                        <li>Led SaaS ERP (R'Dash) implementation at ICICI HFC</li>
+                        <li>Automated manual Cab Logs into Digital Workflows</li>
+                        <li>Expert in Supply Chain & Vendor Governance</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="experience" class="reveal">
+            <span class="gold-text">Career Journey</span>
+            <h2 style="margin-bottom: 4rem;">Professional Timeline</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-date">CURRENT • PIRAMAL NEXTGEN</div>
+                    <div class="timeline-card">
+                        <h3>Sr. Executive – ERP & Projects</h3>
+                        <p style="color: var(--text-dim); margin-top: 0.5rem;">Leading ERP implementation, KT sessions, UAT workflows, and designing financial SOPs for cashflow tracking and governance.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">2021 - 2023 • R’DASH (DEPLOYED AT ICICI HFC)</div>
+                    <div class="timeline-card">
+                        <h3>Project Consultant / PMO</h3>
+                        <p style="color: var(--text-dim); margin-top: 0.5rem;">Delivered 57+ projects. Onboarded vendors to digital platforms. Built decision-support dashboards reducing delays through risk analysis.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">EARLY CAREER • ANJ GROUP</div>
+                    <div class="timeline-card">
+                        <h3>Project Coordinator</h3>
+                        <p style="color: var(--text-dim); margin-top: 0.5rem;">Managed large-scale fit-outs for Standard Chartered Bank and Viacom18. Focused on BOQ, rate analysis, and vendor coordination.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="case-studies" class="reveal">
+            <span class="gold-text">Impact Stories</span>
+            <h2 style="margin-bottom: 3rem;">Product Case Studies</h2>
+            <div class="case-grid">
+                <div class="case-card">
+                    <h3>Schedule Tracking System</h3>
+                    <p style="color: var(--gold); font-size: 0.8rem; margin-bottom: 1rem;">PROBLEM: Lack of execution visibility.</p>
+                    <p style="color: var(--text-dim);">Designed a centralized tracker using Google Apps Script with milestone logic and stakeholder dashboards.</p>
+                    <div class="case-meta">
+                        <span class="tag">Product Thinking</span>
+                        <span class="tag">Workflow Design</span>
+                    </div>
+                </div>
+                <div class="case-card">
+                    <h3>Cab Log Automation</h3>
+                    <p style="color: var(--gold); font-size: 0.8rem; margin-bottom: 1rem;">PROBLEM: Paper-based reconciliation delays.</p>
+                    <p style="color: var(--text-dim);">Structured digital workflow with validation and automated reporting. Improved operational accuracy significantly.</p>
+                    <div class="case-meta">
+                        <span class="tag">Process Digitization</span>
+                        <span class="tag">Cost Visibility</span>
+                    </div>
+                </div>
+                <div class="case-card">
+                    <h3>Compliance Dashboard</h3>
+                    <p style="color: var(--gold); font-size: 0.8rem; margin-bottom: 1rem;">PROBLEM: Fragmented vendor tracking.</p>
+                    <p style="color: var(--text-dim);">Built high-level dashboards enabling leadership to monitor performance and statutory compliance in one view.</p>
+                    <div class="case-meta">
+                        <span class="tag">Governance</span>
+                        <span class="tag">Data-Driven</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="skills" class="reveal">
+            <span class="gold-text">Capabilities</span>
+            <h2 style="margin-bottom: 3rem;">Expertise Matrix</h2>
+            <div class="skills-wrapper">
+                <div class="skill-group">
+                    <h4>Execution & Delivery</h4>
+                    <ul class="skill-list">
+                        <li>PAN India Project Delivery</li>
+                        <li>Vendor Ecosystems</li>
+                        <li>Cost Control & BOQ</li>
+                    </ul>
+                </div>
+                <div class="skill-group">
+                    <h4>Systems Thinking</h4>
+                    <ul class="skill-list">
+                        <li>ERP Implementation</li>
+                        <li>Workflow Optimization</li>
+                        <li>User Adoption Strategy</li>
+                    </ul>
+                </div>
+                <div class="skill-group">
+                    <h4>Data & Intelligence</h4>
+                    <ul class="skill-list">
+                        <li>Dashboard Design</li>
+                        <li>Power BI (Learning)</li>
+                        <li>Google Apps Script</li>
+                    </ul>
+                </div>
+                <div class="skill-group">
+                    <h4>Leadership</h4>
+                    <ul class="skill-list">
+                        <li>Pressure Management</li>
+                        <li>Ownership-Driven</li>
+                        <li>Solution Oriented</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="reveal">
+            <div class="contact-container">
+                <div class="contact-info">
+                    <span class="gold-text">Connect</span>
+                    <h2>Ready to Build Systems?</h2>
+                    <p style="margin: 2rem 0; color: var(--text-dim);">Let’s discuss project governance, ERP deployment, or process digitization.</p>
+                    <a href="tel:9076377967">9076377967</a>
+                    <a href="mailto:lalitdnishad1@gmail.com">lalitdnishad1@gmail.com</a>
+                    <a href="https://linkedin.com/in/lalitdnishad" target="_blank">LinkedIn Profile</a>
+                </div>
+                <form class="contact-form">
+                    <input type="text" placeholder="Full Name">
+                    <input type="email" placeholder="Email Address">
+                    <textarea rows="6" placeholder="Project Details / Message"></textarea>
+                    <button type="submit" class="btn btn-primary">Send Message</button>
+                </form>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>"I don’t just manage projects. I build systems that scale."</p>
+            <p style="margin-top: 1rem; font-size: 0.7rem; opacity: 0.5;">© 2024 Lalit Nishad. Crafted for Leadership.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Reveal Sections on Scroll
+        const observerOptions = { threshold: 0.1 };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.classList.add('reveal');
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('section').forEach(section => observer.observe(section));
+
+        // Particle Background Logic
+        const canvas = document.getElementById('hero-canvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+
+        function initCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 1.5;
+                this.speedX = Math.random() * 0.4 - 0.2;
+                this.speedY = Math.random() * 0.4 - 0.2;
+                this.alpha = Math.random() * 0.5;
+            }
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+                if (this.x > canvas.width) this.x = 0;
+                if (this.x < 0) this.x = canvas.width;
+                if (this.y > canvas.height) this.y = 0;
+                if (this.y < 0) this.y = canvas.height;
+            }
+            draw() {
+                ctx.fillStyle = `rgba(46, 204, 113, ${this.alpha})`;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        function createParticles() {
+            particles = [];
+            for (let i = 0; i < 60; i++) particles.push(new Particle());
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(p => { p.update(); p.draw(); });
+            requestAnimationFrame(animate);
+        }
+
+        window.addEventListener('resize', () => { initCanvas(); createParticles(); });
+        initCanvas();
+        createParticles();
+        animate();
+    </script>
+</body>
+</html>
