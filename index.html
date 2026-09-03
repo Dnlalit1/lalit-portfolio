@@ -32,10 +32,19 @@ section{padding:74px 0}.section-head{display:flex;justify-content:space-between;
 footer{border-top:1px solid var(--line);padding:28px 0;color:var(--muted);font-size:13px}
 .reveal{opacity:0;transform:translateY(16px);transition:.7s}.reveal.show{opacity:1;transform:none}
 @media(max-width:850px){.hero,.analytics,.contact{grid-template-columns:1fr}.grid,.skills{grid-template-columns:1fr 1fr}.project-grid{grid-template-columns:1fr}.navlinks{display:none}}
-@media(max-width:560px){.grid,.skills{grid-template-columns:1fr}.hero{padding-top:62px}.section-head{display:block}.section-head h2{margin-bottom:8px}}
+.fireflies{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+.firefly{position:absolute;width:1.5px;height:1.5px;border-radius:50%;background:var(--accent);box-shadow:0 0 3px 1px var(--accent),0 0 7px 2px rgba(100,230,193,.3);opacity:0;animation:drift linear infinite,glow ease-in-out infinite}
+@keyframes drift{0%{transform:translate(0,0)}25%{transform:translate(30px,-40px)}50%{transform:translate(-20px,-80px)}75%{transform:translate(40px,-40px)}100%{transform:translate(0,0)}}
+@keyframes glow{0%,100%{opacity:0}50%{opacity:.9}}
+body,nav,section,header,footer{position:relative;z-index:1}
+.card{transition:transform .3s ease,box-shadow .3s ease,border-color .3s ease}
+.card:hover{transform:translateY(-4px);border-color:var(--accent);box-shadow:0 24px 70px rgba(0,0,0,.28)}
+.kpi-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:32px}.kpi{padding:18px;border:1px solid var(--line);border-radius:14px;background:#0b1720;text-align:center}.kpi strong{display:block;font-size:26px;font-family:"Space Grotesk";color:var(--accent)}.kpi span{color:var(--muted);font-size:12px}
+@media(max-width:560px){.kpi-strip{grid-template-columns:1fr 1fr}}
 </style>
 </head>
 <body>
+<div class="fireflies" id="fireflies"></div>
 <nav><div class="wrap inner"><a class="brand" href="#">ERP<span>/</span>PROJECTS</a><div class="navlinks"><a href="#about">Profile</a><a href="#journey">Journey</a><a href="#projects">Projects</a><a href="#analytics">Analytics</a><a href="#contact">Contact</a></div></div></nav>
 
 <header class="wrap hero reveal">
@@ -50,10 +59,10 @@ footer{border-top:1px solid var(--line);padding:28px 0;color:var(--muted);font-s
 <div class="actions"><a class="btn primary" href="#contact">Work with me</a><a class="btn" href="#projects">Explore projects</a><a class="btn" href="resume.pdf" download>Download résumé</a></div>
 </div>
 <div class="hero-card">
-<div class="metric"><strong>₹347 Cr</strong><span>International airport project supported through the implemented ERP ecosystem</span></div>
-<div class="metric"><strong>₹30 Cr+</strong><span>Invoice workflow scale monitored</span></div>
-<div class="metric"><strong>₹10 Cr / month</strong><span>Approx. payment outflow visibility</span></div>
-<div class="metric"><strong>57+</strong><span>PAN-India MEP & Civil projects experience</span></div>
+<div class="metric"><strong data-target="347" data-suffix=" Cr" data-prefix="₹">₹0 Cr</strong><span>International airport project supported through the implemented ERP ecosystem</span></div>
+<div class="metric"><strong data-target="30" data-suffix=" Cr+" data-prefix="₹">₹0 Cr+</strong><span>Invoice workflow scale monitored</span></div>
+<div class="metric"><strong data-target="10" data-suffix=" Cr / month" data-prefix="₹">₹0 Cr / month</strong><span>Approx. payment outflow visibility</span></div>
+<div class="metric"><strong data-target="57" data-suffix="+" data-prefix="">0+</strong><span>PAN-India MEP & Civil projects experience</span></div>
 </div>
 </header>
 
@@ -66,7 +75,15 @@ footer{border-top:1px solid var(--line);padding:28px 0;color:var(--muted);font-s
 <div class="card reveal"><h3>Automation & AI</h3><p>Build practical automations using Google Apps Script, AI and web-based workflows to replace repetitive manual work.</p><span class="tag">Google Apps Script</span><span class="tag">AI</span><span class="tag">Automation</span></div>
 <div class="card reveal"><h3>Reporting & Analytics</h3><p>Department-wise trackers, dashboards, web reporting and direct email notifications that turn operational data into management visibility.</p><span class="tag">MIS</span><span class="tag">Dashboards</span><span class="tag">Analytics</span></div>
 <div class="card reveal"><h3>Process Governance</h3><p>SOP development, procurement, contracts, execution and accounts workflows with clearer controls and accountability.</p><span class="tag">SOP</span><span class="tag">Procurement</span><span class="tag">Governance</span></div>
-</div></div></section>
+</div>
+<!-- Edit these 4 numbers with your real figures -->
+<div class="kpi-strip">
+<div class="kpi reveal"><strong data-target="15" data-suffix="+">0</strong><span>SOPs designed & rolled out</span></div>
+<div class="kpi reveal"><strong data-target="5" data-suffix="">0</strong><span>Custom automations built</span></div>
+<div class="kpi reveal"><strong data-target="3" data-suffix="">0</strong><span>Departments unified on ERP</span></div>
+<div class="kpi reveal"><strong data-target="40" data-suffix="%">0</strong><span>Avg. reduction in manual reporting time</span></div>
+</div>
+</div></section>
 
 <section id="journey"><div class="wrap">
 <div class="section-head"><div><div class="eyebrow">Career journey</div><h2>From coordination to ownership.</h2></div><p>A progression from project execution into consulting, PMO, ERP and organization-wide transformation.</p></div>
@@ -89,9 +106,10 @@ footer{border-top:1px solid var(--line);padding:28px 0;color:var(--muted);font-s
 </div></div></section>
 
 <section id="analytics"><div class="wrap">
-<div class="section-head"><div><div class="eyebrow">Capability</div><h2>Where the effort goes.</h2></div><p>Illustrative breakdown of focus areas across recent work.</p></div>
-<div class="analytics" style="grid-template-columns:1fr;max-width:520px;margin:auto">
+<div class="section-head"><div><div class="eyebrow">Capability & growth</div><h2>Where the effort goes — and how it's grown.</h2></div><p>Illustrative view of focus areas and career trajectory based on the scope described above.</p></div>
+<div class="analytics">
 <div class="card chart-card"><h3>Capability mix</h3><canvas id="mix"></canvas></div>
+<div class="card chart-card"><h3>Scope of ownership over time</h3><canvas id="growth"></canvas></div>
 </div></div></section>
 
 <section><div class="wrap">
@@ -120,9 +138,30 @@ footer{border-top:1px solid var(--line);padding:28px 0;color:var(--muted);font-s
 <footer><div class="wrap">© <span id="year"></span> • ERP / Projects / Systems / Automation</div></footer>
 <script>
 document.getElementById('year').textContent=new Date().getFullYear();
+(function(){const c=document.getElementById('fireflies');const n=22;for(let i=0;i<n;i++){const f=document.createElement('div');f.className='firefly';f.style.left=Math.random()*100+'%';f.style.top=Math.random()*100+'%';const dur=8+Math.random()*10;const gdur=2+Math.random()*3;f.style.animationDuration=dur+'s,'+gdur+'s';f.style.animationDelay=(-Math.random()*dur)+'s,'+(-Math.random()*gdur)+'s';c.appendChild(f);}})();
 const obs=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('show')}),{threshold:.08});
 document.querySelectorAll('.reveal').forEach(x=>obs.observe(x));
 new Chart(document.getElementById('mix'),{type:'doughnut',data:{labels:['ERP & Systems','Projects & PMO','Automation & AI','Reporting & Analytics','Process & Operations'],datasets:[{data:[25,25,20,15,15]}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{color:'#9eb0bd',boxWidth:12}}}}});
+new Chart(document.getElementById('growth'),{type:'line',data:{labels:['Project\nCoordinator','Project\nConsultant','PMO /\nGovernance','Sr. Exec\nERP & Projects'],datasets:[{label:'Scope of ownership',data:[2,4,7,9.5],borderColor:'#64e6c1',backgroundColor:'rgba(100,230,193,.12)',fill:true,tension:.35,pointBackgroundColor:'#64e6c1',pointRadius:5}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{beginAtZero:true,max:10,grid:{color:'#203342'},ticks:{display:false}},x:{grid:{display:false},ticks:{color:'#9eb0bd',font:{size:10}}}}}});
+(function(){
+const els=document.querySelectorAll('[data-target]');
+const animate=(el)=>{
+const target=parseFloat(el.getAttribute('data-target'));
+const suffix=el.getAttribute('data-suffix')||'';
+const prefix=el.getAttribute('data-prefix')||'';
+const dur=1400;const start=performance.now();
+function step(now){
+const p=Math.min((now-start)/dur,1);
+const eased=1-Math.pow(1-p,3);
+const val=Math.round(target*eased);
+el.textContent=prefix+val+suffix;
+if(p<1)requestAnimationFrame(step);else el.textContent=prefix+target+suffix;
+}
+requestAnimationFrame(step);
+};
+const kpiObs=new IntersectionObserver((entries)=>{entries.forEach(e=>{if(e.isIntersecting){animate(e.target);kpiObs.unobserve(e.target);}})},{threshold:.4});
+els.forEach(el=>kpiObs.observe(el));
+})();
 </script>
 </body>
 </html>
